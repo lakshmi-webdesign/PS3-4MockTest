@@ -1,0 +1,5 @@
+{
+	"version": 2,
+	"builds": [{ "src": "BD3-4/server.js", "use": "@vercel/node" }],
+	"rewrites": [{ "source": "/(.*)", "destination": "BD3-4/server.js" }]
+}
