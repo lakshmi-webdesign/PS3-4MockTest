@@ -26,29 +26,40 @@ const students = [
     { id: 5, name: "Ethan", age: 20, grade: "B", subjects: ["English", "History"] }
 ];
 
+app.get('/students', async (req, res) => {
+
+    let result1 = [
+        await findFirstGradeAStudent(students),
+        await findMathAndScienceStudent(students),
+        await findStudentWithNameStartingC(students)
+    ];
+
+    let result2 = [
+        await findIndexOfStudentAge21(students),
+        await findIndexOfGradeC(students),
+        await findIndexOfHistoryStudent(students),
+    ];
+
+    let result3 = [
+        await validateStudentNames(students),
+        await validateGradeEligibility(students),
+        await validateStudentSubjects(students),
+    ];
+
+    let result4 = [
+        await getStudentsBySubject(students, 'Math'),
+        await getStudentsBySubject(students, 'History'),
+        await getStudentsBySubject(students, 'Art'),
+
+        await getStudentsAboveAge(students, 20),
+        await getStudentsAboveAge(students, 18),
+        await getStudentsAboveAge(students, 22),
+
+        await calculateAverageAge(students)
+    ]
+    res.status(200).json({ result1, result2, result3, result4 })
+});
+
 app.listen(4000, async () => {
     console.log("server running at port", 4000)
-
-    console.log(findFirstGradeAStudent(students));
-    console.log(findMathAndScienceStudent(students));
-    console.log(findStudentWithNameStartingC(students));
-
-    console.log(findIndexOfStudentAge21(students));
-    console.log(findIndexOfGradeC(students));
-    console.log(findIndexOfHistoryStudent(students));
-
-    console.log(validateStudentNames(students));
-    console.log(validateGradeEligibility(students));
-    console.log(validateStudentSubjects(students));
-
-    console.log(getStudentsBySubject(students, 'Math'));
-    console.log(getStudentsBySubject(students, 'History'));
-    console.log(getStudentsBySubject(students, 'Art'));
-
-    console.log(getStudentsAboveAge(students, 20));
-    console.log(getStudentsAboveAge(students, 18));
-    console.log(getStudentsAboveAge(students, 22));
-
-    console.log(calculateAverageAge(students));
-
 });
